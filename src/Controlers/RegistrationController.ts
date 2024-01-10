@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { registerUser } from '../services/RegistrationServices';
+import { registerUser } from '../Services/RegistrationServices';
 import { User } from '../Models/RegistrationModel';
 export const RegistrationController = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -16,12 +16,11 @@ export const RegistrationController = async (req: Request, res: Response): Promi
       ischeck,
       password,
     };
-
     const userId = await registerUser(newUser);
     if (userId !== null) {
       res.json({ id: userId, ...newUser });
     } else {
-      res.status(500).send('Failed to add user');
+      res.status(500).send('Failed to register user');
     }
   } catch (error) {
     console.error(error);
