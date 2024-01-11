@@ -3,6 +3,7 @@ import { User } from '../Models/RegistrationModel';
 import bcrypt from 'bcrypt';
 import { sendEmail } from '../Helpers/SendMail';
 const saltRounds = 10; 
+
 export const registerUser = async (user: User) => {
   try {
     const salt = await bcrypt.genSalt(saltRounds);
@@ -21,3 +22,4 @@ export const registerUser = async (user: User) => {
     return null;
   }
 };
+

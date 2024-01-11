@@ -1,23 +1,18 @@
 import { Request, Response } from 'express';
-import { registerUser } from '../Services/RegistrationServices';
-import { User } from '../Models/RegistrationModel';
+import { LoginUser } from '../Models/LoginModel';
+import { LoginUserService } from '../Services/LoginService';
 export const RegistrationController = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { firstname, lastname, phone, email, ischeck,password } = req.body;
-    if (!firstname || !lastname || !phone || !email || ischeck === undefined || !password) {
+    const { email,password } = req.body;
+    if ( !email || !password) {
       res.status(400).json({ error: 'Incomplete user information provided' });
       return;
     }
-    const newUser: User = {
-      firstname,
-      lastname,
-      phone,
+    const newUser: LoginUser = {
       email,
-      ischeck,
       password,
     };
-    
-    const userId = await registerUser(newUser);
+    const userId = await LoginUserService(newUser);
     if (userId !== null) {
       res.json({ id: userId, ...newUser });
     } else {
