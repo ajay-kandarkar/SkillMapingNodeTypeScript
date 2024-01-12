@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { registerUser } from '../Services/RegistrationServices';
+import { registerUser, confirmEmail } from '../Services/RegistrationServices';
 import { User } from '../Models/RegistrationModel';
 export const RegistrationController = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { firstname, lastname, phone, email, ischeck,password } = req.body;
+    const { firstname, lastname, phone, email, ischeck, password } = req.body;
     if (!firstname || !lastname || !phone || !email || ischeck === undefined || !password) {
       res.status(400).json({ error: 'Incomplete user information provided' });
       return;
@@ -16,9 +16,10 @@ export const RegistrationController = async (req: Request, res: Response): Promi
       ischeck,
       password,
     };
-    
     const userId = await registerUser(newUser);
     if (userId !== null) {
+      const verificationLink = `http://localhost:8081/mail-verification/${userId}`;
+      console.log(`Verification Link: ${verificationLink}`);
       res.json({ id: userId, ...newUser });
     } else {
       res.status(500).send('Failed to register user');
@@ -28,4 +29,21 @@ export const RegistrationController = async (req: Request, res: Response): Promi
     res.status(500).send('Internal Server Error');
   }
 };
+export const EmailConfirmationController = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = parseInt(req.params.userId, 10);
+    if (isNaN(userId)) {
+      res.status(400).json({ error: 'Invalid user ID provided' });
+      return;
+    }
+    await confirmEmail(userId);
+    res.json({
+      message: 'Email confirmed successfully',
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 
