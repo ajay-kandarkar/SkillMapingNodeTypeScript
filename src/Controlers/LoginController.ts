@@ -1,26 +1,25 @@
 import { Request, Response } from 'express';
-import { LoginUser } from '../Models/LoginModel';
 import { LoginUserService } from '../Services/LoginService';
-export const RegistrationController = async (req: Request, res: Response): Promise<void> => {
+export const LoginController = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { email,password } = req.body;
-    if ( !email || !password) {
-      res.status(400).json({ error: 'Incomplete user information provided' });
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(400).json({ error: 'Email and password are required' });
       return;
     }
-    const newUser: LoginUser = {
+    const loginUser = {
       email,
       password,
     };
-    const userId = await LoginUserService(newUser);
-    if (userId !== null) {
-      res.json({ id: userId, ...newUser });
+    const user = await LoginUserService(loginUser);
+    if (user) {
+      res.status(200).json({ message: 'Login successful', user });
     } else {
-      res.status(500).send('Failed to register user');
+      res.status(401).json({ error: 'Invalid credentials' });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 

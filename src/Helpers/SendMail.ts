@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
 const { SMTP_MAIL, SMTP_PASSWORD } = process.env;
-
 const sendEmail = async (mailOptions : any) => {
   try {
     const transporter = nodemailer.createTransport({

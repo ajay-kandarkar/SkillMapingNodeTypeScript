@@ -4,7 +4,6 @@ const dbConfig: PoolOptions = {
     user: 'root',
     password: 'root',
     database: 'skillmapping',
-   
 };
 const pool: Pool = createPool(dbConfig);
 pool.getConnection()

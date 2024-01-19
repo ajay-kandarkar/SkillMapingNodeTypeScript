@@ -1,11 +1,11 @@
 
 export interface User {
     id?: number; 
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
     phone: string;
     email: string;
-    ischeck: boolean;
+    isCheck: boolean;
     password:string
   }
   
