@@ -5,6 +5,6 @@ export const getAllUsers = async () => {
       return result; 
     } catch (error) {
       console.error(error);
-      return null;
+      return error;
     }
   };

@@ -18,7 +18,6 @@ export const LoginController = async (req: Request, res: Response): Promise<void
       res.status(401).json({ error: 'Invalid credentials' });
     }
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

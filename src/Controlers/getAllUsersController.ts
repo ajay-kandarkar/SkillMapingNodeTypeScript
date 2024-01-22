@@ -5,7 +5,6 @@ export const getAllUsersController = async (req: Request, res: Response): Promis
       const allUsers = await getAllUsers();
       res.json(allUsers);
     } catch (error) {
-      console.error(error);
       res.status(500).send('Internal Server Error');
     }
   };

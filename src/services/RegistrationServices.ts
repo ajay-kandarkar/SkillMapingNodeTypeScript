@@ -23,14 +23,11 @@ export const registerUser = async (user: User): Promise<number | null> => {
         html: content,
       };
       await sendEmail(mailOptions);
-      console.log('Verification email sent successfully.');
       return userId;
     } else {
-      console.error('Failed to register user. No insertId found in the result.');
       return null;
     }
   } catch (error) {
-    console.error(error);
     return null;
   }
 }
@@ -38,14 +35,7 @@ export const registerUser = async (user: User): Promise<number | null> => {
 export const confirmEmail = async (userId: number): Promise<void | null> => {
   try {
     const [result] = await pool.query('UPDATE userRegistration SET isconfirmed = true WHERE id = ?', [userId]);
-
-    if (result && 'affectedRows' in result && result.affectedRows > 0) {
-      console.log('Email confirmed successfully.');
-    } else {
-      console.error('Invalid user ID or user not found.');
-    }
   } catch (error) {
-    console.error(error);
     return null;
   }
 };
