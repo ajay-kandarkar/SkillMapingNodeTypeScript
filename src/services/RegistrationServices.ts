@@ -8,7 +8,7 @@ export const registerUser = async (user: User): Promise<number | null> => {
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(user.password, salt);
     const [result] = await pool.query(
-      'INSERT INTO userRegistration (firstName, lastName, phone, email, isCheck, password) VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO userRegistration (first_name, last_name, phone, email, is_check, password) VALUES (?, ?, ?, ?, ?, ?)',
       [user.firstName, user.lastName, user.phone, user.email, user.isCheck, hashedPassword]
     );
     if (result && 'insertId' in result) {
@@ -34,7 +34,7 @@ export const registerUser = async (user: User): Promise<number | null> => {
 
 export const confirmEmail = async (userId: number): Promise<void | null> => {
   try {
-    const [result] = await pool.query('UPDATE userRegistration SET isconfirmed = true WHERE id = ?', [userId]);
+    const [result] = await pool.query('UPDATE userRegistration SET is_confirmed = true WHERE id = ?', [userId]);
   } catch (error) {
     return null;
   }

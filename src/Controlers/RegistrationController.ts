@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { registerUser, confirmEmail } from '../Services/RegistrationServices';
 import { User } from '../Models/RegistrationModel';
-export const RegistrationController = async (req: Request, res: Response): Promise<void> => {
+export const registrationController = async (req: Request, res: Response): Promise<void> => {
   try {
     const { firstName, lastName, phone, email, isCheck, password } = req.body;
     if (!firstName || !lastName || !phone || !email || isCheck === undefined || !password) {
@@ -20,7 +20,7 @@ export const RegistrationController = async (req: Request, res: Response): Promi
     if (userId !== null) {
       const verificationLink = `http://localhost:8081/mail-verification/${userId}`;
       console.log(`Verification Link: ${verificationLink}`);
-      res.json({ id: userId,message: 'User registered successfully confirm mail verification',...newUser});
+      res.json({ id: userId, message: 'User registered successfully confirm mail verification', ...newUser });
     } else {
       res.status(500).send({ error: 'This User is Already Registered' });
     }
@@ -28,7 +28,6 @@ export const RegistrationController = async (req: Request, res: Response): Promi
     res.status(500).send('Internal Server Error');
   }
 };
-
 
 export const EmailConfirmationController = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -43,8 +42,8 @@ export const EmailConfirmationController = async (req: Request, res: Response): 
     });
   } catch (error) {
     res.json({
-        message: 'Error occure confirmed successfully'
-      })
+      message: 'Error occure confirmed successfully'
+    })
     res.status(500).send('Internal Server Error');
   }
 };
