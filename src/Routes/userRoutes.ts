@@ -17,6 +17,10 @@ import { getDomainControler } from '../Controlers/getDomainControler';
 import { addClientControler } from '../Controlers/AddClientControler';
 import { getAllClientController } from '../Controlers/GetAllClientControler';
 import { addProjectControler } from '../Controlers/AddProjectControler';
+import { updateProjectControllerById } from '../Controlers/UpdateProjectControler';
+
+
+
 
 const router = express.Router();
 
@@ -42,8 +46,12 @@ router.get("/get-all-client",getAllClientController)
 router.post("/add-projects",addProjectControler)
 router.delete('/delete-project/:id',deleteClientByIdController);
 
+
+
 //projects new api 
 router.get('/get-allProjects',getAllProjectsController);
+router.put('/update-project/:userId', updateProjectControllerById);
+
 
 
 export default router;
