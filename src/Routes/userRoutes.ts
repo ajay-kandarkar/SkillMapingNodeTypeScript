@@ -18,10 +18,6 @@ import { addClientControler } from '../Controlers/AddClientControler';
 import { getAllClientController } from '../Controlers/GetAllClientControler';
 import { addProjectControler } from '../Controlers/AddProjectControler';
 import { updateProjectControllerById } from '../Controlers/UpdateProjectControler';
-
-
-
-
 const router = express.Router();
 
 router.post('/register', registrationController);
@@ -33,10 +29,6 @@ router.post('/forget-password',forgotPasswordController)
 router.post('/change-password', changePasswordController);
 router.put('/update-client/:id',updateClientById);
 router.post('/insertProject',insertProjectController);
-
-
-
-// new api
 router.get("/get-all-skill",getAllSkillController)
 router.post("/add-skill",addSkillControler)
 router.get("/get-country",getAllCountryControler)
@@ -45,10 +37,6 @@ router.post("/add-client",addClientControler)
 router.get("/get-all-client",getAllClientController)
 router.post("/add-projects",addProjectControler)
 router.delete('/delete-project/:id',deleteClientByIdController);
-
-
-
-//projects new api 
 router.get('/get-allProjects',getAllProjectsController);
 router.put('/update-project/:userId', updateProjectControllerById);
 
