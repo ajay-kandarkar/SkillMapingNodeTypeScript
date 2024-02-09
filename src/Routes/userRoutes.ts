@@ -8,17 +8,19 @@ import { forgotPasswordController } from '../Controlers/ForgetPasswordControler'
 import { changePasswordController } from '../Controlers/ChangePasswordControler';
 import { getAllProjectsController } from '../Controlers/GetAllProjects';
 import { deleteClientByIdController } from '../Controlers/DeleteProjectsControler';
-import { updateClientById } from '../Services/updateClientService';
+import { updateClientController } from '../Controlers/UpdateClientController';
 import { insertProjectController } from '../Controlers/InsertProjectsController';
 import { getAllSkillController } from '../Controlers/GetAllSkillControler';
-import { addSkillControler } from '../Controlers/AddSkillControler';
+import { addSkillController } from '../Controlers/AddSkillControler';
 import { getAllCountryControler } from '../Controlers/GetCountry';
 import { getDomainControler } from '../Controlers/getDomainControler';
 import { addClientControler } from '../Controlers/AddClientControler';
 import { getAllClientController } from '../Controlers/GetAllClientControler';
 import { addProjectControler } from '../Controlers/AddProjectControler';
 import { updateProjectControllerById } from '../Controlers/UpdateProjectControler';
+import { deletClient } from '../Controlers/DeleteClientControler';
 const router = express.Router();
+
 
 router.post('/register', registrationController);
 router.get('/get-register-user',getAllUsersController);
@@ -27,10 +29,9 @@ router.get('/mail-verification/:userId', EmailConfirmationController);
 router.get('/get-login-user/:id',getLoginUserByIdController)
 router.post('/forget-password',forgotPasswordController)
 router.post('/change-password', changePasswordController);
-router.put('/update-client/:id',updateClientById);
 router.post('/insertProject',insertProjectController);
 router.get("/get-all-skill",getAllSkillController)
-router.post("/add-skill",addSkillControler)
+router.post("/add-skill",addSkillController)
 router.get("/get-country",getAllCountryControler)
 router.get("/get-domain",getDomainControler)
 router.post("/add-client",addClientControler)
@@ -39,7 +40,7 @@ router.post("/add-projects",addProjectControler)
 router.delete('/delete-project/:id',deleteClientByIdController);
 router.get('/get-allProjects',getAllProjectsController);
 router.put('/update-project/:userId', updateProjectControllerById);
-
-
+router.delete('/delete-client/:userId',deletClient);
+router.put('/update-client/:userId',updateClientController);
 
 export default router;

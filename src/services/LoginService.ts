@@ -16,7 +16,7 @@ export const LoginUserService = async (user: LoginUser) => {
         const isPasswordMatch = await bcrypt.compare(user.password, storedUser.password);
         if (isPasswordMatch) {
           const token = jwt.sign({email: storedUser.email },'12345678', {
-            expiresIn: '60', 
+            expiresIn: '960', 
           });
           return { user: storedUser, token };
         } else {

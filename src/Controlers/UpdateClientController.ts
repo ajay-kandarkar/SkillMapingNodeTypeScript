@@ -7,7 +7,6 @@ export const updateClientController = async (req: Request, res: Response) => {
     await updateClientById(userId, updatedData);
     res.json({success: true, message: 'Client updated successfully.' });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Internal Server Error.' });
   }
 };

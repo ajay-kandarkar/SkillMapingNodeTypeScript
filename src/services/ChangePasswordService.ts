@@ -10,17 +10,15 @@ const getUserByResetToken = async (token: string): Promise<RowDataPacket[] | nul
     );
     return result;
   } catch (error) {
-    console.error('Error querying database in getUserByResetToken:', error);
     throw error;
   }
 };
 
 export const changePassword = async (token: string, newPassword: string) => {
   try {
-
     const user = await getUserByResetToken(token);
     const salt = await bcrypt.genSalt(saltRounds);
-    const newHashedPassword = await bcrypt.hash(newPassword, salt);  
+    const newHashedPassword = await bcrypt.hash(newPassword, salt);
     if (user && user.length > 0) {
       const email = user[0].email;
 
@@ -33,11 +31,9 @@ export const changePassword = async (token: string, newPassword: string) => {
       return true;
 
     } else {
-      console.error('Invalid or expired reset token in changePassword service');
       return false;
     }
   } catch (error) {
-    console.error('Error in changePassword service:', error);
     throw error;
   }
 };

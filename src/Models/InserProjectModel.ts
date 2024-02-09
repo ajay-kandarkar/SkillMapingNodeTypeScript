@@ -5,4 +5,5 @@ export interface InsertProjectModel {
     status:boolean,
     skill_name:string,
     client_name:string
+    
   }

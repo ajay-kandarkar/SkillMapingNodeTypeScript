@@ -5,5 +5,6 @@ export interface Project {
     skill_id : number;
     client_id : number;
     registration_id : number;
+    draft_editor_content : string;
    }
    

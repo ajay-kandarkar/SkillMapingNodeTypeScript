@@ -17,7 +17,7 @@ export const addClientControler = async (req: Request, res: Response): Promise<v
 
             };
             await addClient(client);
-            res.status(200).json({ message: "skill add sucesfully" })
+            res.status(200).json({ message: "Client add sucesfully",client : client })
         }
     } catch (error) {
         res.status(500).send('Internal Server Error');
