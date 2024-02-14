@@ -19,8 +19,8 @@ import { getAllClientController } from '../Controlers/GetAllClientControler';
 import { addProjectControler } from '../Controlers/AddProjectControler';
 import { updateProjectControllerById } from '../Controlers/UpdateProjectControler';
 import { deletClient } from '../Controlers/DeleteClientControler';
-const router = express.Router();
 
+const router = express.Router();
 
 router.post('/register', registrationController);
 router.get('/get-register-user',getAllUsersController);
