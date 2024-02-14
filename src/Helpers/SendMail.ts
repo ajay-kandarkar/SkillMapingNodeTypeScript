@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import dotenv from 'dotenv';
+dotenv.config(); 
 const { SMTP_MAIL, SMTP_PASSWORD } = process.env;
 const sendEmail = async (mailOptions : any) => {
   try {
@@ -7,8 +9,8 @@ const sendEmail = async (mailOptions : any) => {
       port: 465,
       secure: true,
       auth: {
-        user: "ajaykandarkar170@gmail.com",
-        pass: "ikra lhsj iqsc bggk",
+        user: SMTP_MAIL,
+        pass: SMTP_PASSWORD,
       },
     });
     const info = await transporter.sendMail(mailOptions);
